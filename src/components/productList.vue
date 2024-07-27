@@ -7,7 +7,7 @@
     @leave="leave"
   >
     <div
-      class="row d-none mb-3 align-items-center"
+      class="row d-flex pt-5 align-items-center"
       v-for="(item, index) in showItems"
       :key="item.id"
       :data-index="index"
@@ -32,6 +32,7 @@
 
 <script>
 import price from "./price.vue";
+
 export default {
   name: "product-list",
   components: {

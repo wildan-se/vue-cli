@@ -1,12 +1,12 @@
 <template>
   <nav class="navbar navbar-light fixed-top">
     <div class="navbar-text ml-auto d-flex">
-      <button class="btn btn-sm btn-outline-success" @click="$emit('toggle')">
+      <button class="btn btn-md btn-outline-success" @click="$emit('toggle')">
         <font-awesome-icon icon="dollar-sign"></font-awesome-icon>
       </button>
-      <div class="dropdown ml-2" v-if="cart.length > 0">
+      <div class="dropdown ml-3" v-if="cart.length > 0">
         <button
-          class="btn btn-success btn-sm dropdown-toggle"
+          class="btn btn-success btn-md dropdown-toggle"
           id="dropdownCart"
           data-toggle="dropdown"
           aria-haspopup="true"
