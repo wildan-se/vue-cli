@@ -1,4 +1,4 @@
-# test-fontawesome
+# latihan-vue
 
 ## Project setup
 ```
