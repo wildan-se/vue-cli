@@ -1,11 +1,10 @@
 <template>
   <transition
-    name="custom"
-    enter-active-class="animated fadeInRight"
-    leave-active-class="animated fadeOutRight"
-  >
+    name="fade"
+    enter-active-class="fade-enter-active"
+    leave-active-class="fade-leave-active">
     <div v-if="sliderStatus">
-      <div class="d-flex align-items-center w-100" :class="sliderState">
+      <div class="d-flex align-items-center w-100 mt-5 pt-5">
         <label for="" class="font-weight-bold mr-2">Max</label>
         <input
           type="number"
@@ -13,17 +12,14 @@
           max="200"
           style="width: 60px; text-align: center; margin: 10px"
           v-model="maxAmount"
-          @change="$emit('update:maximum', maxAmount)"
-        />
-
+          @change="$emit('update:maximum', maxAmount)" />
         <input
           type="range"
           min="0"
           max="200"
           style="width: max-content"
           v-model="maxAmount"
-          @input="$emit('update:maximum', maxAmount)"
-        />
+          @input="$emit('update:maximum', maxAmount)" />
       </div>
     </div>
   </transition>
@@ -32,30 +28,29 @@
 <script>
 export default {
   name: "price-slider",
-  data: function () {
+  data() {
     return {
       maxAmount: 50,
     };
   },
   props: ["sliderStatus", "maximum"],
-  computed: {
-    // Mengembalikan kelas CSS untuk slider berdasarkan status sliderStatus
-    sliderState: function () {
-      return this.sliderStatus ? "d-flex" : "d-none";
+  watch: {
+    maximum(newVal) {
+      this.maxAmount = newVal;
     },
   },
 };
 </script>
 
 <style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s ease-in-out;
+}
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 1s ease-in-out;
 }
 
 .btn-square {

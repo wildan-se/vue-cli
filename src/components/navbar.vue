@@ -1,7 +1,11 @@
 <template>
   <nav class="navbar navbar-light fixed-top">
+    <h1>IDShop</h1>
     <div class="navbar-text ml-auto d-flex">
-      <button class="btn btn-md btn-outline-success" @click="$emit('toggle')">
+      <button
+        class="btn btn-md btn-outline-success"
+        @click="$emit('toggle-slide')"
+      >
         <font-awesome-icon icon="dollar-sign"></font-awesome-icon>
       </button>
       <div class="dropdown ml-3" v-if="cart.length > 0">
@@ -18,24 +22,29 @@
           <price :value="Number(cartTotal)"></price>
         </button>
         <div
-          class="dropdown-menu dropdown-menu-right"
+          class="dropdown-menu dropdown-menu-right mt-2"
           aria-labelledby="dropdownCart"
         >
           <div v-for="(item, index) in cart" :key="index">
-            <div class="dropdown-item-text text-nowrap text-right">
-              <span class="badge badge-pill badge-warning align-text-top mr-1">
+            <div class="dropdown-item-text text-nowrap text-left">
+              <span class="badge badge-pill badge-warning align-text-top m-1">
                 {{ item.qty }}
               </span>
               {{ item.product.name }}
               <b>{{ (item.qty * item.product.price) | currencyFormat }}</b>
               <a
                 href="#"
-                class="badge badge-danger text-white"
-                @click.stop="$emit('delete', index)"
+                class="badge badge-danger text-white ml-2"
+                @click.stop="$emit('delete-item', index)"
                 >-</a
               >
             </div>
           </div>
+          <router-link
+            class="btn btn-sm btn-outline-info text-dark float-right mr-2"
+            to="/checkout"
+            >Checkout</router-link
+          >
         </div>
       </div>
     </div>

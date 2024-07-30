@@ -4,18 +4,15 @@
     tag="div"
     @beforeEnter="before"
     @enter="enter"
-    @leave="leave"
-  >
+    @leave="leave">
     <div
       class="row d-flex pt-5 align-items-center"
       v-for="(item, index) in showItems"
       :key="item.id"
-      :data-index="index"
-    >
+      :data-index="index">
       <div class="col-1 m-auto">
-        <button class="btn btn-info" @click="$emit('add', item)">+</button>
+        <button class="btn btn-info" @click="$emit('add-item', item)">+</button>
       </div>
-
       <div class="col-sm-4" loading="lazy">
         <img class="img-fluid" :src="item.image" :alt="item.name" />
       </div>
@@ -40,30 +37,24 @@ export default {
   },
   props: ["products", "maximum"],
   computed: {
-    showItems: function () {
-      let max = this.maximum;
-      return this.products.filter(function (item) {
-        return item.price <= max;
-      });
+    showItems() {
+      return this.products.filter(item => item.price <= this.maximum);
     },
   },
   methods: {
-    // Fungsi yang dipanggil sebelum elemen dimasukkan ke dalam DOM
-    before: function (el) {
+    before(el) {
       el.className = "d-none";
     },
-    // Fungsi yang dipanggil saat elemen dimasukkan ke dalam DOM
-    enter: function (el) {
+    enter(el) {
       const delay = el.dataset.index * 100;
-      setTimeout(function () {
+      setTimeout(() => {
         el.className =
           "row d-flex mb-3 align-items-center animated fadeInRight";
       }, delay);
     },
-    // Fungsi yang dipanggil saat elemen dihapus dari DOM
-    leave: function (el) {
+    leave(el) {
       const delay = el.dataset.index * 100;
-      setTimeout(function () {
+      setTimeout(() => {
         el.className =
           "row d-flex mb-3 align-items-center animated fadeOutRight";
       }, delay);
